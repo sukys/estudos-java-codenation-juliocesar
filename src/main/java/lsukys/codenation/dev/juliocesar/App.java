@@ -18,27 +18,46 @@ import lsukys.codenation.dev.juliocesar.utils.LogUtil;
 
 public class App {
 
+	/**
+	 * DEFINIR O TOKEN
+	 */
+	private static String TOKEN_VALUE = "";
+	
 	private static Logger log = LogUtil.getLogger(App.class);
+	private static ObjectMapper mapper = new ObjectMapper();
+	
 	private static final Map<String, String> PARAMETROS = new HashMap<String, String>();
-	private static final String TOKEN_VALUE = "";
 	private static final String FILENAME = "answer.json";
 	private static final String URL_REQUEST ="https://api.codenation.dev/v1/challenge/dev-ps/generate-data";
 	private static final String URL_POST = "https://api.codenation.dev/v1/challenge/dev-ps/submit-solution";
-	private static ObjectMapper mapper = new ObjectMapper();
-
-	public static void main(String[] args) { 
 	
+
+	/**
+	 * Inicia a aplicação. 
+	 * Caso o token nao esteja definido no código, informar por parâmetro. 
+	 * Se necessário, mudar o nivel do log em src/main/resources/log4j.properties
+	 * @param args
+	 */
+	public static void main(String[] args) { 
 		log.info("Iniciando a aplicação.");
+		if(TOKEN_VALUE.trim().isEmpty() && args.length > 0) {
+			log.info("Definindo o token '{}' informado por parâmetro.", args[0]);
+			TOKEN_VALUE = args[0];
+		}
+		
 		if(TOKEN_VALUE == null || TOKEN_VALUE.trim().isEmpty()) {
-			log.error("!!! É NECESSÁRIO INFORMAR O TOKEN !!!");
+			log.error(">>>>> É NECESSÁRIO INFORMAR O TOKEN <<<<<");
 		}else {
 			IniciarApp();
 		}
 		log.info("Aplicação Encerrada.");
-		
 	}
 
 	
+	/**
+	 * Executa os comandos necessários para solução do desafio.
+	 * 
+	 */
 	private static void IniciarApp() {
 
 		PARAMETROS.put("token", TOKEN_VALUE);

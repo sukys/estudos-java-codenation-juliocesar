@@ -18,7 +18,7 @@ public class FileUtil {
 	 * @param fileContent
 	 */
 	public static File saveToFile(String filename, String fileContent) {
-		log.debug("SAlvando o arquivo '{}'.", filename);
+		log.debug("Salvando o arquivo '{}'.", filename);
 		File arquivo = null;
 		try {
 			arquivo = new File(filename);

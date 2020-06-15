@@ -43,7 +43,7 @@ public class ApiUtil {
 				retorno.append(URLEncoder.encode(item.getValue(), "UTF-8"));
 			}
 		} catch (UnsupportedEncodingException e) {
-			log.error("Retornando a url >> Erro ao efetuar o encode dos parametros: {} ", e.getMessage());
+			log.error("Retornando a url sem parâmetros. Erro ao efetuar o encode dos parametros: {} ", e.getMessage());
 			return url;
 		}
 		
@@ -58,7 +58,7 @@ public class ApiUtil {
 	 * @return
 	 */
 	public static String getRequest(String url, Map<String, String> parametros) {
-		log.debug("Inciando a requisição GET");
+		log.info("Inciando a requisição GET");
 		HttpClient client = HttpClient.newHttpClient();
 		HttpResponse<String> response = null;
 		try {
@@ -76,7 +76,7 @@ public class ApiUtil {
 
 	
 	public static String sendFile(String url, Map<String, String> parametros, File file) {
-		log.debug("Iniciando o procedimento para envio do arquivo via POST.");
+		log.info("Iniciando o procedimento para envio do arquivo via POST.");
 		
 		OkHttpClient client = new OkHttpClient();
 		RequestBody formBody;
@@ -100,9 +100,8 @@ public class ApiUtil {
         	status = String.valueOf(response.code());
 			
         	log.debug("Requisição efetuada. Verificando retorno:");
-			log.debug("Codigo: {}", status);
-			log.debug("Body: \n{}", response.body().string());
-			log.debug("Message: \n{}", response.message());
+			log.info("Codigo: {}", status);
+			log.info("Body: \n\n {} \n", response.body().string());
 		} catch (IOException e) {
 			log.error("Falha ao enviar a requisição: {} ", e.getMessage());
 		}
