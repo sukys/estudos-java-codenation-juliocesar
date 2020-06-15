@@ -76,4 +76,30 @@ public class CriptoUtil {
 		log.debug("Cifrando a mensagem apra SHA1.");
 		return DigestUtils.sha1Hex(texto.getBytes());
 	}
+	
+	/**
+	 * Codifica um texto informando o texto e o numero de casas para
+	 * conversão.
+	 * 
+	 * @param texto para ser cifrado
+	 * @param numeroCasas
+	 * @return
+	 */
+	public static String cifrar(String textoCifrado, int numeroCasas) {
+		log.debug("Decifrando a mensagem pelo algoritmo de Julio Cesar.");
+		List<String> cifradoList = Arrays.asList(textoCifrado.split(""));
+		StringBuilder decifrado = new StringBuilder();
+		int index = -1;
+		for(String letter : cifradoList) {
+			if(!ALFABETO_LIST.contains(letter)) {
+				decifrado.append(letter);
+				continue;
+			}
+			letter = letter.trim().toLowerCase();
+			index = Math.floorMod(ALFABETO_LIST.indexOf(letter) + numeroCasas, ALFABETO.trim().length());
+			decifrado.append(ALFABETO_LIST.get(index));
+		}
+		return decifrado.toString();
+	}
+	
 }
