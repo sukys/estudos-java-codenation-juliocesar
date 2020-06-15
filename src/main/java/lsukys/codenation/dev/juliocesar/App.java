@@ -20,8 +20,7 @@ public class App {
 
 	private static Logger log = LogUtil.getLogger(App.class);
 	private static final Map<String, String> PARAMETROS = new HashMap<String, String>();
-	// private static final String TOKEN_VALUE = "";
-	private static final String TOKEN_VALUE = "20179bb6c1a792bdb9a5e91712a9c81bee759796";
+	private static final String TOKEN_VALUE = "";
 	private static final String FILENAME = "answer.json";
 	private static final String URL_REQUEST ="https://api.codenation.dev/v1/challenge/dev-ps/generate-data";
 	private static final String URL_POST = "https://api.codenation.dev/v1/challenge/dev-ps/submit-solution";
