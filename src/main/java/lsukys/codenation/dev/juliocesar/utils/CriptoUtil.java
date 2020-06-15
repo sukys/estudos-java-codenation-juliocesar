@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 public class CriptoUtil {
 
 	private static Logger log = LogUtil.getLogger(CriptoUtil.class);
-	private static final String ALFABETO = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+	private static final String ALFABETO = "abcdefghijklmnopqrstuvwxyz";
 	private static final List<String> ALFABETO_LIST = Arrays.asList(ALFABETO.split(""));
 
 	/**
@@ -21,6 +21,32 @@ public class CriptoUtil {
 	 * @return
 	 */
 	public static String decifrar(String textoCifrado, int numeroCasas) {
+		log.debug("Decifrando a mensagem pelo algoritmo de Julio Cesar.");
+		List<String> cifradoList = Arrays.asList(textoCifrado.split(""));
+		StringBuilder decifrado = new StringBuilder();
+		int index = -1;
+		for(String letter : cifradoList) {
+			if(!ALFABETO_LIST.contains(letter)) {
+				decifrado.append(letter);
+				continue;
+			}
+			letter = letter.trim().toLowerCase();
+			index = Math.floorMod(ALFABETO_LIST.indexOf(letter) - numeroCasas, ALFABETO.trim().length());
+			decifrado.append(ALFABETO_LIST.get(index));
+		}
+		return decifrado.toString();
+	}
+	
+	
+	/**
+	 * Decifra um codigo informando o texto para decifrar e o numero de casas para
+	 * conversão.
+	 * 
+	 * @param textoCifrado
+	 * @param numeroCasas
+	 * @return
+	 */
+	public static String decifrar_metodo_2(String textoCifrado, int numeroCasas) {
 		log.debug("Decifrando a mensagem pelo algoritmo de Julio Cesar.");
 		List<String> cifradoList = Arrays.asList(textoCifrado.split(""));
 		String decifrado = "";

@@ -72,7 +72,7 @@ public class App {
 		} catch (JsonProcessingException e) {
 			log.error("Falha ao converter o json para Objeto.");
 		}
-		
+
 		if(message != null && message.getDecifrado() == null || message.getDecifrado().trim().isEmpty()) {
 			message.setDecifrado(CriptoUtil.decifrar(message.getCifrado(), message.getNumeroCasas()));
 			arquivoSolucao  = FileUtil.saveToFile(FILENAME, message.toString());
@@ -91,7 +91,6 @@ public class App {
 			log.debug("Retorno ocorreu com sucesso.");
 			FileUtil.deleteFile(arquivoSolucao);
 		}
-	
 	}
 	
 	/**
